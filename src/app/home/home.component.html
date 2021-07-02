@@ -1,0 +1,89 @@
+<!-- <ActionBar>
+  <Label text="AWS"></Label>
+</ActionBar> -->
+
+<ActionBar title="AWS IVS">
+  <ActionItem text="change" (tap)="changeType()" ios.systemIcon="4" ios.position="right" android.position="popup">
+  </ActionItem>
+</ActionBar>
+
+<GridLayout rows="auto, *">
+
+  <StackLayout row="0" class="cell">
+    <GridLayout columns="*,*,*" padding="5 0 10 0">
+      <StackLayout col="0">
+        <label text="SD"></label>
+        <label [text]="streamingCostSD | currency"></label>
+      </StackLayout>
+      <StackLayout col="1">
+        <label text="HD"></label>
+        <label [text]="streamingCostHD | currency"></label>
+      </StackLayout>
+      <StackLayout col="2">
+        <label text="FHD"></label>
+        <label [text]="streamingCostFHD | currency"></label>
+      </StackLayout>
+    </GridLayout>
+    <label text="Total Streaming Cost"></label>
+    <label class="bold" [text]="totalStreamingCost | currency"></label>
+  </StackLayout>
+
+  <ListView row="1" [items]="gridData">
+    <ng-template let-item="item" let-i="index">
+      <StackLayout>
+        <label [text]="item.name"></label>
+        <label [text]="item.cost | currency"></label>
+        <Slider [id]="i" [value]="item.baseStreamHour? item.baseStreamHour+item.plusStreamHour : 0" minValue="0"
+          maxValue="5000000" (valueChange)="onSliderValueChange($event)">
+        </Slider>
+        <GridLayout columns="*,*">
+          <StackLayout col="0">
+            <label [text]="'$'+item.ratePerhour1+'/hour'"></label>
+            <TextField hint="Hours" secure="false" keyboardType="number" returnKeyType="done" autocorrect="false"
+              maxLength="10" [text]="item.baseStreamHour" (returnPress)="onReturnPress($event)"
+              (focus)="onFocus($event)" (blur)="onBlur($event)" class="inputField">
+            </TextField>
+          </StackLayout>
+
+          <StackLayout col="1">
+            <label [text]="'$'+item.ratePerhour2+'/hour'"></label>
+            <TextField hint="Hours" secure="false" keyboardType="number" returnKeyType="done" autocorrect="false"
+              maxLength="10" [text]="item.plusStreamHour" (returnPress)="onReturnPress($event)"
+              (focus)="onFocus($event)" (blur)="onBlur($event)" class="inputField">
+            </TextField>
+          </StackLayout>
+        </GridLayout>
+      </StackLayout>
+    </ng-template>
+  </ListView>
+</GridLayout>
+
+
+
+<!--
+
+<StackLayout>
+
+  <label text="NorthAmerica"></label>
+  <Slider value="100" minValue="0" maxValue="20000" (valueChange)="onSliderValueChange($event)">
+  </Slider>
+  <GridLayout columns="*,*">
+    <StackLayout col="0">
+      <label text="Label"></label>
+      <TextField hint="Hours" secure="false" keyboardType="number" returnKeyType="done" autocorrect="false"
+        maxLength="10" [text]="firstHours" (returnPress)="onReturnPress($event)" (focus)="onFocus($event)"
+        (blur)="onBlur($event)">
+      </TextField>
+    </StackLayout>
+
+    <StackLayout col="1">
+      <label text="Label"></label>
+      <TextField hint="Hours" secure="false" keyboardType="number" returnKeyType="done" autocorrect="false"
+        maxLength="10" [text]="overHours" (returnPress)="onReturnPress($event)" (focus)="onFocus($event)"
+        (blur)="onBlur($event)">
+      </TextField>
+    </StackLayout>
+
+  </GridLayout>
+
+</StackLayout> -->
